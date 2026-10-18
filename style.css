@@ -1600,3 +1600,12 @@ body.gallery-modal-open{overflow:hidden}
 }
 @media(max-width:900px){.page-hero.alumni-profile-hero{background-position:center 25% !important;}}
 @media(max-width:620px){.page-hero.alumni-profile-hero{background-position:center 20% !important;}}
+
+/* v42 — menu móvel acessível em telas pequenas */
+@media(max-width:850px){
+ .topbar{z-index:2000;}
+ .menu{top:100%;max-height:calc(100dvh - 76px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;box-sizing:border-box;padding-bottom:32px;}
+ .menu.open{display:flex;}
+ .menu a{display:block;width:100%;min-height:44px;box-sizing:border-box;padding:10px 4px;}
+ .menu-button{cursor:pointer;min-width:44px;min-height:44px;}
+}
