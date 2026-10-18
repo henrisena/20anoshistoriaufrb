@@ -1,5 +1,14 @@
 
-document.querySelectorAll(".menu-button").forEach(btn=>btn.addEventListener("click",()=>document.querySelector(".menu").classList.toggle("open")));
+document.querySelectorAll(".menu-button").forEach(btn=>{
+ const menu=btn.closest(".topbar")?.querySelector(".menu");if(!menu)return;
+ btn.setAttribute("aria-expanded","false");
+ btn.setAttribute("aria-controls",menu.id||(menu.id="main-navigation"));
+ const close=()=>{menu.classList.remove("open");btn.setAttribute("aria-expanded","false");};
+ btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));});
+ menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",close));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")close();});
+ document.addEventListener("click",e=>{if(!btn.contains(e.target)&&!menu.contains(e.target))close();});
+});
 const mapData=[
 {id:"juliana",titulo:"Egressa no doutorado em História Social",categoria:"egressos",nome:"Juliana Andrade dos Santos",cidade:"Salvador",local:"Universidade Federal da Bahia (UFBA)",ano:2015,periodo:"2015",lat:-12.9994,lng:-38.5090,imagem:"assets/ufba-exemplo.svg",pageImagem:"../assets/ufba-exemplo.svg",descricao:"Egressa da Licenciatura em História da UFRB. Em 2015, ingressa no doutorado em História Social na UFBA, desenvolvendo pesquisa sobre memória, cultura popular e educação patrimonial no Recôncavo Baiano.",fonte:"Exemplo demonstrativo: formulário colaborativo, currículo Lattes, foto autorizada ou imagem institucional."},
 {id:"camila",titulo:"Atividade de ensino de História e cultura visual",categoria:"professores",nome:"Camila Santiago",cidade:"Cachoeira",local:"CAHL/UFRB",ano:2024,periodo:"2024",lat:-12.5996,lng:-38.9653,imagem:"assets/camila-santiago.jpg",pageImagem:"../assets/camila-santiago.jpg",descricao:"Atividade formativa com estudantes da licenciatura, articulando ensino de História, imagens e memórias do Recôncavo.",fonte:"Exemplo demonstrativo: cartaz, fotos e relatório de atividade."},
